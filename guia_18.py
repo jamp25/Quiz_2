@@ -46,33 +46,33 @@ xdata = []
 ydata = []
 t = 0.0
 while (True):
-time.sleep(nT) # T de muestreo, fs = 1/nT
-uart.write(flag_ctrl) # comando de conv. ADC
-code = int(uart.readline()) # lee y conv. a entero
-Tm = (R * code)/Ks # calcula temperatura
-e = r - Tm # calcula error
+    time.sleep(nT) # T de muestreo, fs = 1/nT
+    uart.write(flag_ctrl) # comando de conv. ADC
+    code = int(uart.readline()) # lee y conv. a entero
+    Tm = (R * code)/Ks # calcula temperatura
+    e = r - Tm # calcula error
 #-- calcula valores de pertenencia a cada conjunto difuso --#
-u_etmn = fz.interp_membership(U,etmn,e)
-u_etne = fz.interp_membership(U,etne,e)
-u_etze = fz.interp_membership(U,etze,e)
-u_etpo = fz.interp_membership(U,etpo,e)
-u_etmp = fz.interp_membership(U,etmp,e)
+    u_etmn = fz.interp_membership(U,etmn,e)
+    u_etne = fz.interp_membership(U,etne,e)
+    u_etze = fz.interp_membership(U,etze,e)
+    u_etpo = fz.interp_membership(U,etpo,e)
+    u_etmp = fz.interp_membership(U,etmp,e)
 #-- imprime resultados --#
-print 'Tm = %.1f' % (Tm), u"\u2103"#, '\n'
-print 'e = r - Tm = %.2f' % (e), u"\u2103"#, '\n'
-print 'Valores de pertenencia:'
-print ' -----------------'
-print ' | u_etmn = %.2f | ' % (u_etmn)
-print ' | u_etne = %.2f | ' % (u_etne)
-print ' | u_etze = %.2f | ' % (u_etze)
-print ' | u_etpo = %.2f | ' % (u_etpo)
-print ' | u_etmp = %.2f | ' % (u_etmp)
-print ' -----------------'
+    print 'Tm = %.1f' % (Tm), u"\u2103"#, '\n'
+    print 'e = r - Tm = %.2f' % (e), u"\u2103"#, '\n'
+    print 'Valores de pertenencia:'
+    print ' -----------------'
+    print ' | u_etmn = %.2f | ' % (u_etmn)
+    print ' | u_etne = %.2f | ' % (u_etne)
+    print ' | u_etze = %.2f | ' % (u_etze)
+    print ' | u_etpo = %.2f | ' % (u_etpo)
+    print ' | u_etmp = %.2f | ' % (u_etmp)
+    print ' -----------------'
 #-- actualiza vectores y grafica --#
-t = t + nT
-xdata.append(t)
-ydata.append(Tm)
-line.set_data(xdata, ydata)
-plt.pause(0.001)
+    t = t + nT
+    xdata.append(t)
+    ydata.append(Tm)
+    line.set_data(xdata, ydata)
+    plt.pause(0.001)
 
 
